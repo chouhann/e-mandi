@@ -16,36 +16,36 @@ import com.emandi.model.Order;
 
 @WebServlet("/orders")
 public class OrdersServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private OrderDAO orderDAO;
-    
-    @Override
-    public void init() throws ServletException {
-        orderDAO = new OrderDAO();
-    }
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException {
-        
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-        
-        int userId = (Integer) session.getAttribute("userId");
-        
-        try {
-            // Get all orders for this user
-            List<Order> orders = orderDAO.getOrdersByUserId(userId);
-            request.setAttribute("orders", orders);
-            
-            request.getRequestDispatcher("/jsp/orders.jsp").forward(request, response);
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
-        }
-    }
+	private static final long serialVersionUID = 1L;
+	private OrderDAO orderDAO;
+
+	@Override
+	public void init() throws ServletException {
+		orderDAO = new OrderDAO();
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("userId") == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
+
+		int userId = (Integer) session.getAttribute("userId");
+
+		try {
+			// Get all orders for this user
+			List<Order> orders = orderDAO.getOrdersByUserId(userId);
+			request.setAttribute("orders", orders);
+
+			request.getRequestDispatcher("/jsp/orders.jsp").forward(request, response);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+		}
+	}
 }
