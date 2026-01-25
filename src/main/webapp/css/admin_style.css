@@ -195,15 +195,19 @@ section {
     position: absolute;
     top: 120%;
     right: 2rem;
+
     background-color: var(--white);
     border-radius: .5rem;
     box-shadow: var(--box-shadow);
     border: var(--border);
     padding: 2rem;
-    text-align: center;
-    width: 30rem;
+
     display: none;
     animation: fadeIn .2s linear;
+
+    /* 🔑 KEY FIX */
+    width: max-content;
+    max-width: 90vw;   /* safety for very large screens */
 }
 
 .header .flex .account-box.active {
@@ -220,6 +224,17 @@ section {
     color: var(--purple);
 }
 
+
+.header .flex .account-box p,
+.header .flex .account-box p span {
+    display: block;
+    max-width: 100%;
+    white-space: wrap;       /* force single line */
+    overflow: visible;          /* hide overflow */
+    text-overflow: ellipsis;   /* show ... */
+}
+
+
 .header .flex .account-box .delete-btn {
     margin-top: 1rem;
 }
@@ -229,10 +244,17 @@ section {
 }
 
 @keyframes fadeIn {
-    0% {
+    from {
         transform: translateY(1rem);
+        opacity: 0;
+    }
+    to {
+    
+        transform: translateY(0);
+        opacity: 1;
     }
 }
+
 
 .dashboard .box-container {
     display: grid;

@@ -29,6 +29,7 @@
         <div class="account-box">
             <% if (adminName != null) { %>
                 <p>Username : <span><%= adminName %></span></p>
+                <p>Email: <span><%= session.getAttribute("userEmail") %></span></p>
                 <a href="${pageContext.request.contextPath}/logout" class="delete-btn">Logout</a>
             <% } else { %>
                 <p>Please login first!</p>
@@ -37,3 +38,24 @@
         </div>
     </div>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const accountBox = document.querySelector('.header .flex .account-box');
+
+
+    // Close popup when clicking anywhere else
+    document.addEventListener('click', function (e) {
+        if (accountBox && userBtn) {
+            if (
+                !accountBox.contains(e.target) &&
+                !userBtn.contains(e.target)
+            ) {
+                accountBox.classList.remove('active');
+            }
+        }
+    });
+
+});
+</script>
