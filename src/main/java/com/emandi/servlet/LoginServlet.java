@@ -55,8 +55,11 @@ public class LoginServlet extends HttpServlet {
 				// Redirect based on user type
 				if (user.isAdmin()) {
 					response.sendRedirect(request.getContextPath() + "/admin/dashboard");
-				} else {
+				} else if (user.isUser()) {
 					response.sendRedirect(request.getContextPath() + "/home");
+				} else {
+					request.setAttribute("errorMessage","user type is not defined Register again!!!");
+					request.getRequestDispatcher("/register.jsp").forward(request, response);
 				}
 			} else {
 				// Login failed

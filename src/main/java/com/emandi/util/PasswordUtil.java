@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtil {
 
-	// MD5 hash (matching PHP's md5() function)
+	// MD5 hash
 	public static String hashPassword(String password) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

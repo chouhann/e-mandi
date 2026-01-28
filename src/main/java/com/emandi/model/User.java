@@ -66,7 +66,10 @@ public class User implements Serializable {
 	public boolean isAdmin() {
 		return "admin".equalsIgnoreCase(userType);
 	}
-
+	
+	public boolean isUser() {
+		return "user".equalsIgnoreCase(userType);
+	}
 	@Override
 	public String toString() {
 		return "User{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", userType='" + userType
